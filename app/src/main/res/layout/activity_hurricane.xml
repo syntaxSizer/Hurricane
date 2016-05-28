@@ -7,10 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.android.qusai.hurricane.HurricaneActivity">
+    tools:context="com.android.qusai.hurricane.HurricaneActivity"
+    android:background="@drawable/background02">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
 </RelativeLayout>
