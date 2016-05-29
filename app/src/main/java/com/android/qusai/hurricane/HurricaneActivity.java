@@ -3,8 +3,14 @@ package com.android.qusai.hurricane;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +25,8 @@ import retrofit.client.Response;
 public class HurricaneActivity extends Activity {
     private List<Track> mListItems;
     private SCTrackAdapter mAdapter;
+    private TextView mSelectedTrackTitle;
+    private ImageView mSelectedTrackImage;
     private static final String TAG = "HurricaneActivity";
 
     @Override
@@ -30,6 +38,24 @@ public class HurricaneActivity extends Activity {
         ListView listView = (ListView)findViewById(R.id.track_list_view);
         mAdapter = new SCTrackAdapter(this,mListItems);
         listView.setAdapter(mAdapter);
+
+
+        //adding the selected track to the play bar at the bottom
+        mSelectedTrackTitle = (TextView) findViewById(R.id.selected_track_title);
+        mSelectedTrackImage = (ImageView) findViewById(R.id.selected_track_image);
+
+        // adding a clicklistener
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Track track =mListItems.get(position);
+
+
+                mSelectedTrackTitle.setText(track.getTitle());
+                Picasso.with(HurricaneActivity.this).load(track.getArtworkURL()).into(mSelectedTrackImage);
+            }
+        });
 
 //        Log.e("stuff","Stuff");
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(Config.API_URL).build();
