@@ -1,15 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EA938B"
     android:orientation="vertical"
-    tools:context=".HurricaneActivity">
+    tools:context=".HurricaneActivity"
+    >
 
     <ListView
         android:id="@+id/track_list_view"
         android:layout_weight="100"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp" />
 
     <android.support.v7.widget.Toolbar
         android:background="#222"
