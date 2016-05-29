@@ -46,6 +46,8 @@ public class HurricaneActivity extends Activity {
         mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
 
 
+//
+
             @Override
             public void onPrepared(MediaPlayer mp) {
                 togglePlayPause();
@@ -60,10 +62,18 @@ public class HurricaneActivity extends Activity {
 
 
 
+
                 }
                 else {
                     mMediaPlayer.start();
                     mPlayerControl.setImageResource(R.drawable.ic_pause);
+                    mPlayerControl.setOnClickListener(new View.OnClickListener(){
+
+                        @Override
+                        public void onClick(View v) {
+                            togglePlayPause();
+                        }
+                    });
                 }
             }
         });
@@ -80,6 +90,7 @@ public class HurricaneActivity extends Activity {
         mSelectedTrackTitle = (TextView) findViewById(R.id.selected_track_title);
         mSelectedTrackImage = (ImageView) findViewById(R.id.selected_track_image);
         mPlayerControl = (ImageView) findViewById(R.id.player_control);
+
 
         // adding a clicklistener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -102,6 +113,12 @@ public class HurricaneActivity extends Activity {
                 try{
                     mMediaPlayer.setDataSource(track.getStream_URL() + "?client_id=" + Config.CLIENT_ID);
                     mMediaPlayer.prepareAsync();
+                    mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mPlayerControl.setImageResource(R.drawable.ic_play);
+                        }
+                    });
 
 
                 }catch (IOException e){
