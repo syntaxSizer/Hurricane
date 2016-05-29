@@ -12,7 +12,7 @@
         android:layout_height="0dp"/>
 
     <android.support.v7.widget.Toolbar
-        android:background="#333333"
+        android:background="#222"
         android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_width="match_parent"
         android:layout_height="100dp">

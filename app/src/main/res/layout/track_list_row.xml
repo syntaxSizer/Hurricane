@@ -18,6 +18,7 @@
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#fff"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
 </RelativeLayout>

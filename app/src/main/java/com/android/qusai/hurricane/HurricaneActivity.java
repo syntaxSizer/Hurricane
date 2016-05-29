@@ -1,6 +1,8 @@
 package com.android.qusai.hurricane;
 
 import android.app.Activity;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,12 +29,35 @@ public class HurricaneActivity extends Activity {
     private SCTrackAdapter mAdapter;
     private TextView mSelectedTrackTitle;
     private ImageView mSelectedTrackImage;
+    private MediaPlayer mMediaPlayer;
+    private ImageView mPlayerControl;
     private static final String TAG = "HurricaneActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hurricane);
+
+        // music play
+        mMediaPlayer = new MediaPlayer();
+        // setting audio stream type
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
+
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                togglePlayPause();
+            }
+            private void togglePlayPause(){
+
+                if(mMediaPlayer.isPlaying()){
+                    mMediaPlayer.Pause();
+
+                }
+            }
+        });
+
+
 
         mListItems = new ArrayList<Track>();
         ListView listView = (ListView)findViewById(R.id.track_list_view);
@@ -43,13 +68,14 @@ public class HurricaneActivity extends Activity {
         //adding the selected track to the play bar at the bottom
         mSelectedTrackTitle = (TextView) findViewById(R.id.selected_track_title);
         mSelectedTrackImage = (ImageView) findViewById(R.id.selected_track_image);
+        mPlayerControl = (ImageView) findViewById(R.id.player_control);
 
         // adding a clicklistener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Track track =mListItems.get(position);
+                Track track = mListItems.get(position);
 
 
                 mSelectedTrackTitle.setText(track.getTitle());
