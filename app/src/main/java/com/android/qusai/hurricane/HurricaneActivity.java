@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,15 +45,25 @@ public class HurricaneActivity extends Activity {
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
 
+
             @Override
             public void onPrepared(MediaPlayer mp) {
                 togglePlayPause();
             }
+
+            // checking the music player state
             private void togglePlayPause(){
 
                 if(mMediaPlayer.isPlaying()){
-                    mMediaPlayer.Pause();
+                    mMediaPlayer.pause();
+                    mPlayerControl.setImageResource(R.drawable.ic_play);
 
+
+
+                }
+                else {
+                    mMediaPlayer.start();
+                    mPlayerControl.setImageResource(R.drawable.ic_pause);
                 }
             }
         });
@@ -80,6 +91,24 @@ public class HurricaneActivity extends Activity {
 
                 mSelectedTrackTitle.setText(track.getTitle());
                 Picasso.with(HurricaneActivity.this).load(track.getArtworkURL()).into(mSelectedTrackImage);
+
+                //checking if the musicplayer is playing
+                if(mMediaPlayer.isPlaying()){
+                    mMediaPlayer.stop();
+                    mMediaPlayer.reset();
+
+                }
+
+                try{
+                    mMediaPlayer.setDataSource(track.getStream_URL() + "?client_id=" + Config.CLIENT_ID);
+                    mMediaPlayer.prepareAsync();
+
+
+                }catch (IOException e){
+                    e.printStackTrace();
+
+                }
+
             }
         });
 
