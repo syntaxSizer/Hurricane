@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class Track {
     // serializedName used to convert the json to java object or vais versa
 
-    @SerializedName("Title")
+    @SerializedName("title")
     private String mTitle;
 
     @SerializedName("id")
@@ -19,19 +19,19 @@ public class Track {
     @SerializedName("artwork_url")
     private String mArtworkURL;
 
-    public String getmTitle(){
+    public String getTitle(){
         return mTitle;
     }
 
-    public  int getmID(){
+    public  int getID(){
         return mID;
     }
 
-    public String getmStream_URL(){
+    public String getStream_URL(){
         return mStream_URL;
     }
 
-    public String getmArtworkURL(){
+    public String getArtworkURL(){
         return mArtworkURL;
     }
 }
