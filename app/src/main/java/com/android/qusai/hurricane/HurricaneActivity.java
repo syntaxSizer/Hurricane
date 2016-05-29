@@ -155,5 +155,17 @@ public class HurricaneActivity extends Activity {
         mListItems.addAll(tracks);
         mAdapter.notifyDataSetChanged();
 
+
+    }
+
+    protected void onDestroy(){
+        super.onDestroy();
+        if(mMediaPlayer != null){
+            if(mMediaPlayer.isPlaying()){
+                mMediaPlayer.stop();
+            }
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
     }
 }
