@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +26,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class HurricaneActivity extends Activity {
+public class HurricaneActivity extends AppCompatActivity {
     private List<Track> mListItems;
     private SCTrackAdapter mAdapter;
     private TextView mSelectedTrackTitle;
